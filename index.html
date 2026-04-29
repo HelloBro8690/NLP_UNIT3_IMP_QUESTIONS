@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NLP Unit 3 — Exam-Ready Answers</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0d;
+    --paper: #faf7f2;
+    --cream: #f2ede4;
+    --accent: #c0392b;
+    --accent2: #1a5276;
+    --gold: #b7860b;
+    --muted: #6b6560;
+    --border: #d4cfc7;
+    --highlight: #fef9e7;
+    --code-bg: #1e1e2e;
+    --code-fg: #cdd6f4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.02) 40px,
+      rgba(255,255,255,0.02) 80px
+    );
+  }
+  header .badge {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    padding: 0.25rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  header h1 span { color: var(--accent); }
+  header p.subtitle {
+    margin-top: 0.75rem;
+    color: rgba(250,247,242,0.65);
+    font-size: 0.95rem;
+    font-style: italic;
+  }
+
+  /* ── TOC ── */
+  nav.toc {
+    background: var(--cream);
+    border-bottom: 2px solid var(--border);
+    padding: 1.5rem 2rem;
+  }
+  nav.toc h2 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+  nav.toc ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.5rem;
+    list-style: none;
+    counter-reset: toc;
+  }
+  nav.toc ol li { counter-increment: toc; }
+  nav.toc ol li a {
+    color: var(--accent2);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  nav.toc ol li a::before {
+    content: counter(toc) ". ";
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+  }
+  nav.toc ol li a:hover { color: var(--accent); }
+
+  /* ── LAYOUT ── */
+  main { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* ── SECTION ── */
+  .topic {
+    margin-bottom: 3.5rem;
+    border-left: 4px solid var(--accent2);
+    padding-left: 1.5rem;
+    animation: fadeUp 0.5s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .topic-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  .topic-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    background: var(--accent);
+    color: white;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .topic h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  /* ── SUBSECTIONS ── */
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.3rem;
+    margin: 1.4rem 0 0.7rem;
+    display: block;
+  }
+
+  p { margin-bottom: 0.6rem; }
+
+  /* ── LISTS ── */
+  ul, ol {
+    padding-left: 1.4rem;
+    margin-bottom: 0.6rem;
+  }
+  li { margin-bottom: 0.35rem; }
+  li strong { color: var(--accent2); }
+
+  /* ── DEFINITION BOX ── */
+  .def-box {
+    background: var(--highlight);
+    border: 1px solid #e8d48b;
+    border-left: 4px solid var(--gold);
+    border-radius: 4px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.5rem 0 1rem;
+    font-style: italic;
+  }
+
+  /* ── EXAMPLE BOX ── */
+  .example-box {
+    background: #eaf2fb;
+    border: 1px solid #aed6f1;
+    border-left: 4px solid var(--accent2);
+    border-radius: 4px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+    font-size: 0.95rem;
+  }
+  .example-box .ex-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    font-style: normal;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  /* ── CONCLUSION BOX ── */
+  .conclusion-box {
+    background: #f9f0f0;
+    border: 1px solid #f0c4c4;
+    border-left: 4px solid var(--accent);
+    border-radius: 4px;
+    padding: 0.8rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.94rem;
+  }
+
+  /* ── FLOW DIAGRAM ── */
+  .flow-diagram {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .flow-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .flow-box {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 4px;
+    padding: 0.4rem 0.9rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .flow-box.alt {
+    background: var(--accent2);
+  }
+  .flow-box.accent {
+    background: var(--accent);
+  }
+  .flow-box.gold {
+    background: var(--gold);
+    color: var(--ink);
+  }
+  .flow-arrow {
+    font-size: 1.1rem;
+    color: var(--muted);
+    line-height: 1;
+    padding: 0.2rem 0;
+  }
+  .flow-arrow.down { transform: rotate(90deg); display: block; margin: 0 auto; }
+  .flow-note {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-style: italic;
+    text-align: center;
+    margin-top: 0.4rem;
+  }
+
+  /* ── PARSE TREE ── */
+  .tree-container {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 1.2rem 1.5rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    line-height: 1.6;
+    margin: 0.8rem 0;
+    white-space: pre;
+  }
+
+  /* ── COMPARISON TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.8rem 0;
+    font-size: 0.9rem;
+  }
+  th {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+  }
+  td {
+    padding: 0.55rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: var(--cream); }
+
+  /* ── FEATURE STRUCT ── */
+  .feat-struct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.83rem;
+    background: #0d1117;
+    color: #79c0ff;
+    padding: 1rem 1.3rem;
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    line-height: 1.7;
+    white-space: pre;
+  }
+  .feat-struct .key { color: #ffa657; }
+  .feat-struct .val { color: #7ee787; }
+
+  /* ── MARKS BADGE ── */
+  .marks-badge {
+    float: right;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    padding: 0.2rem 0.7rem;
+    margin-top: 0.2rem;
+  }
+
+  /* ── DIVIDER ── */
+  hr.divider {
+    border: none;
+    border-top: 1px dashed var(--border);
+    margin: 3rem 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.82rem;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .topic { padding-left: 1rem; }
+    .tree-container { font-size: 0.72rem; }
+    .flow-box { font-size: 0.72rem; padding: 0.35rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Unit 3 · 6-Mark Exam Answers</div>
+  <h1>Natural Language <span>Processing</span></h1>
+  <p class="subtitle">Parsing · Dependency Grammar · Feature-Based Grammar · Unification</p>
+</header>
+
+<nav class="toc">
+  <h2>Topics Covered</h2>
+  <ol>
+    <li><a href="#t1">Parsing Techniques</a></li>
+    <li><a href="#t2">Dependency Grammar</a></li>
+    <li><a href="#t3">Grammar Development</a></li>
+    <li><a href="#t4">Grammatical Features</a></li>
+    <li><a href="#t5">Unification in Feature-Based Grammar</a></li>
+    <li><a href="#t6">Feature-Based Parsing</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════════
+     TOPIC 1 — PARSING TECHNIQUES
+═══════════════════════════════════════════════ -->
+<section class="topic" id="t1">
+  <div class="topic-header">
+    <span class="topic-num">Q1</span>
+    <h2>Parsing Techniques <span class="marks-badge">6 Marks</span></h2>
+  </div>
+
+  <span class="section-label">Definition</span>
+  <div class="def-box">
+    <strong>Parsing</strong> is the process of analyzing a sentence to determine its grammatical structure according to a given grammar. A parser takes a string of words as input and produces a parse tree (or phrase structure tree) as output.
+  </div>
+
+  <span class="section-label">Types of Parsing</span>
+
+  <!-- Top-Down -->
+  <p><strong>① Top-Down Parsing</strong></p>
+  <ul>
+    <li>Starts from the <strong>start symbol (S)</strong> and tries to derive the input sentence.</li>
+    <li>Expands grammar rules from the top until it reaches terminal (word-level) symbols.</li>
+    <li>Matches left-to-right against the input.</li>
+    <li><em>Strategy:</em> S → NP VP → … → "Mary saw Bob"</li>
+  </ul>
+
+  <div class="flow-diagram">
+    <div class="flow-row">
+      <div class="flow-box">S</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box alt">NP + VP</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box alt">NP + V + NP</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box gold">Mary saw Bob</div>
+    </div>
+    <p class="flow-note">Top-Down: Start symbol expands downward to match input words</p>
+  </div>
+
+  <ul>
+    <li><strong>Advantage:</strong> Goal-directed; only explores trees compatible with grammar.</li>
+    <li><strong>Disadvantage:</strong> May re-expand rules (left-recursion causes infinite loops).</li>
+  </ul>
+
+  <!-- Bottom-Up -->
+  <p><strong>② Bottom-Up Parsing</strong></p>
+  <ul>
+    <li>Starts from the <strong>input words</strong> (leaves) and builds up to the start symbol S.</li>
+    <li>Reduces word sequences to grammar constituents.</li>
+    <li><em>Strategy:</em> "Mary saw Bob" → NP V NP → NP VP → S</li>
+  </ul>
+
+  <div class="flow-diagram">
+    <div class="flow-row">
+      <div class="flow-box gold">Mary saw Bob</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box alt">NP · V · NP</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box alt">NP · VP</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box accent">S</div>
+    </div>
+    <p class="flow-note">Bottom-Up: Words reduce upward to reach the start symbol S</p>
+  </div>
+
+  <ul>
+    <li><strong>Advantage:</strong> Never pursues parses not supported by actual input words.</li>
+    <li><strong>Disadvantage:</strong> May build many constituents that never connect to S.</li>
+  </ul>
+
+  <!-- Left-Corner -->
+  <p><strong>③ Left-Corner Parsing</strong></p>
+  <ul>
+    <li>A <strong>hybrid</strong> of Top-Down and Bottom-Up parsing.</li>
+    <li>Reads the <strong>leftmost word</strong> of a rule's RHS, then predicts the rest top-down.</li>
+    <li>For rule <code>NP → Det N</code>: sees "Mary" (Det), then predicts N top-down.</li>
+  </ul>
+
+  <div class="flow-diagram">
+    <div class="flow-row">
+      <div class="flow-box gold">Input Word (Left Corner)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Bottom-Up Recognition</div>
+      <div class="flow-arrow">+</div>
+      <div class="flow-box alt">Top-Down Prediction</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box accent">Parse Tree</div>
+    </div>
+    <p class="flow-note">Left-Corner: Hybrid — recognize bottom-up, predict top-down</p>
+  </div>
+
+  <ul>
+    <li><strong>Advantage:</strong> Avoids left-recursion problems of top-down; more efficient.</li>
+    <li><strong>Disadvantage:</strong> More complex to implement.</li>
+  </ul>
+
+  <span class="section-label">Comparison Table</span>
+  <table>
+    <tr><th>Feature</th><th>Top-Down</th><th>Bottom-Up</th><th>Left-Corner</th></tr>
+    <tr><td>Starting Point</td><td>Start symbol S</td><td>Input words</td><td>First word of rule</td></tr>
+    <tr><td>Direction</td><td>S → words</td><td>words → S</td><td>Hybrid</td></tr>
+    <tr><td>Left Recursion</td><td>Problem</td><td>No problem</td><td>Handled</td></tr>
+    <tr><td>Efficiency</td><td>Moderate</td><td>Moderate</td><td>Better</td></tr>
+  </table>
+
+  <span class="section-label">Example — "Mary saw Bob"</span>
+  <div class="example-box">
+    <span class="ex-label">Parse Tree</span>
+    <div class="tree-container">        S
+       / \
+     NP   VP
+      |   / \
+    Mary  V   NP
+         |    |
+        saw  Bob</div>
+    All three parsers produce the same tree — they differ only in the <em>order</em> they build it.
+  </div>
+
+  <div class="conclusion-box">
+    <strong>Conclusion:</strong> Top-down is goal-directed, bottom-up is data-directed, and left-corner combines both. Left-corner parsing is generally the most efficient for real NLP grammars as it avoids the pitfalls of the other two approaches.
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════
+     TOPIC 2 — DEPENDENCY GRAMMAR
+═══════════════════════════════════════════════ -->
+<section class="topic" id="t2">
+  <div class="topic-header">
+    <span class="topic-num">Q2</span>
+    <h2>Dependency Grammar <span class="marks-badge">6 Marks</span></h2>
+  </div>
+
+  <span class="section-label">Definition</span>
+  <div class="def-box">
+    <strong>Dependency Grammar</strong> is a grammatical framework that describes the syntactic structure of a sentence in terms of <em>binary asymmetric relations</em> (dependencies) between words. One word (the <strong>head</strong>) governs another (the <strong>dependent/modifier</strong>).
+  </div>
+
+  <span class="section-label">Key Concepts</span>
+  <ul>
+    <li>Every word except the <strong>root</strong> depends on exactly one other word.</li>
+    <li>The <strong>verb</strong> is typically the root/head of a sentence.</li>
+    <li>There are no phrase-structure (constituent) trees — only direct word-to-word links.</li>
+    <li>Each dependency is labeled (subject, object, modifier, etc.).</li>
+  </ul>
+
+  <span class="section-label">Working / Steps</span>
+  <ol>
+    <li>Identify the <strong>root word</strong> (usually the main verb).</li>
+    <li>Find all words that directly depend on the root (subject, object, etc.).</li>
+    <li>For each dependent, find its own dependents recursively.</li>
+    <li>Label each dependency arc with its grammatical role.</li>
+  </ol>
+
+  <span class="section-label">Example — "Mary saw Bob"</span>
+  <div class="example-box">
+    <span class="ex-label">Dependency Graph</span>
+    <div class="tree-container">          saw          ← ROOT
+         /   \
+      nsubj   dobj
+       /         \
+     Mary         Bob</div>
+    <ul>
+      <li><strong>saw</strong> → ROOT (head of sentence)</li>
+      <li><strong>Mary</strong> → nsubj of "saw" (nominal subject)</li>
+      <li><strong>Bob</strong> → dobj of "saw" (direct object)</li>
+    </ul>
+  </div>
+
+  <div class="example-box">
+    <span class="ex-label">Second Example — "Kim chased Lee"</span>
+    <div class="tree-container">         chased        ← ROOT
+          /    \
+       nsubj   dobj
+        /          \
+       Kim         Lee</div>
+  </div>
+
+  <span class="section-label">Common Dependency Relations</span>
+  <table>
+    <tr><th>Relation</th><th>Label</th><th>Example</th></tr>
+    <tr><td>Nominal Subject</td><td>nsubj</td><td>Mary ← saw</td></tr>
+    <tr><td>Direct Object</td><td>dobj</td><td>Bob ← saw</td></tr>
+    <tr><td>Adjectival Modifier</td><td>amod</td><td>big ← dog</td></tr>
+    <tr><td>Prepositional Modifier</td><td>prep</td><td>in ← park</td></tr>
+  </table>
+
+  <span class="section-label">Advantages</span>
+  <ul>
+    <li><strong>Language independence:</strong> Works well for free-word-order languages (e.g., Hindi, Russian).</li>
+    <li><strong>Compact representation:</strong> No intermediate phrase nodes needed.</li>
+    <li><strong>Direct word relations:</strong> Easier to extract semantic roles.</li>
+    <li><strong>Simpler structure:</strong> Easier to annotate and parse in many NLP systems.</li>
+  </ul>
+
+  <div class="conclusion-box">
+    <strong>Conclusion:</strong> Dependency Grammar represents sentence structure as a network of head-dependent word pairs rather than nested phrase brackets. It is widely used in modern NLP parsers for tasks like information extraction and machine translation because of its simplicity and language-neutral design.
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════
+     TOPIC 3 — GRAMMAR DEVELOPMENT
+═══════════════════════════════════════════════ -->
+<section class="topic" id="t3">
+  <div class="topic-header">
+    <span class="topic-num">Q3</span>
+    <h2>Grammar Development <span class="marks-badge">6 Marks</span></h2>
+  </div>
+
+  <span class="section-label">Definition</span>
+  <div class="def-box">
+    <strong>Grammar Development</strong> in NLP is the systematic process of designing, writing, testing, and refining formal grammars (typically Context-Free Grammars) to correctly parse natural language sentences. It involves incrementally adding rules to cover more linguistic phenomena.
+  </div>
+
+  <span class="section-label">Stages of Grammar Development</span>
+
+  <div class="flow-diagram">
+    <div class="flow-row">
+      <div class="flow-box">Start Simple</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box alt">Add Rules</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box alt">Test on Sentences</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box gold">Fix Errors</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box accent">Refine</div>
+    </div>
+    <p class="flow-note">Iterative grammar development cycle</p>
+  </div>
+
+  <ol>
+    <li><strong>Start with a minimal grammar:</strong> Define basic rules for simple sentences (S → NP VP).</li>
+    <li><strong>Test on sample sentences:</strong> Try parsing "Mary saw Bob", "She eats".</li>
+    <li><strong>Identify gaps:</strong> Find sentences the grammar fails to parse.</li>
+    <li><strong>Add new rules:</strong> E.g., add rules for questions, negation, passives.</li>
+    <li><strong>Handle agreement:</strong> Add morphological constraints (subject-verb agreement).</li>
+    <li><strong>Resolve ambiguity:</strong> Refine rules to avoid over-generation.</li>
+  </ol>
+
+  <span class="section-label">Example — Building a Simple Grammar</span>
+  <div class="example-box">
+    <span class="ex-label">Step 1: Minimal Grammar</span>
+    <pre style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;line-height:1.7">
+S  → NP VP
+NP → Noun | Det Noun
+VP → Verb | Verb NP
+Noun  → Mary | Bob | Kim | Lee
+Verb  → saw | chased | eats
+Det   → the | a</pre>
+    This handles: "Mary saw Bob", "Kim chased Lee", "She eats"
+  </div>
+
+  <div class="example-box">
+    <span class="ex-label">Step 2: Extended Grammar (adding pronouns, adjectives)</span>
+    <pre style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;line-height:1.7">
+NP  → Pro | Adj NP
+Pro → she | he | they
+Adj → big | small | old</pre>
+    Now handles: "She eats", "The big dog chased Bob"
+  </div>
+
+  <span class="section-label">Challenges in Grammar Development</span>
+  <ul>
+    <li><strong>Over-generation:</strong> Grammar accepts ungrammatical sentences.</li>
+    <li><strong>Under-generation:</strong> Grammar rejects valid sentences.</li>
+    <li><strong>Agreement errors:</strong> "*She eat" must be rejected (number mismatch).</li>
+    <li><strong>Ambiguity:</strong> One sentence can produce multiple parse trees.</li>
+  </ul>
+
+  <span class="section-label">Importance</span>
+  <ul>
+    <li>Forms the foundation for building robust NLP parsers.</li>
+    <li>Used in rule-based question answering and information extraction systems.</li>
+    <li>Ensures grammatically correct output in natural language generation.</li>
+  </ul>
+
+  <div class="conclusion-box">
+    <strong>Conclusion:</strong> Grammar Development is an iterative process of writing, testing, and refining formal rules. A well-developed grammar precisely captures the grammatical patterns of a language, enabling accurate parsing without over- or under-generation.
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════
+     TOPIC 4 — GRAMMATICAL FEATURES
+═══════════════════════════════════════════════ -->
+<section class="topic" id="t4">
+  <div class="topic-header">
+    <span class="topic-num">Q4</span>
+    <h2>Grammatical Features <span class="marks-badge">6 Marks</span></h2>
+  </div>
+
+  <span class="section-label">Definition</span>
+  <div class="def-box">
+    <strong>Grammatical Features</strong> are formal properties of words or phrases that encode linguistic information such as number, person, gender, tense, and case. Features are expressed as <em>attribute-value pairs</em> and are used to enforce grammatical agreement between sentence constituents.
+  </div>
+
+  <span class="section-label">Common Grammatical Features</span>
+  <table>
+    <tr><th>Feature</th><th>Values</th><th>Example</th></tr>
+    <tr><td><strong>Number</strong></td><td>sg (singular), pl (plural)</td><td>"she" → sg; "they" → pl</td></tr>
+    <tr><td><strong>Person</strong></td><td>1st, 2nd, 3rd</td><td>"I" → 1st; "she" → 3rd</td></tr>
+    <tr><td><strong>Gender</strong></td><td>masc, fem, neuter</td><td>"he" → masc; "she" → fem</td></tr>
+    <tr><td><strong>Tense</strong></td><td>past, present, future</td><td>"saw" → past; "sees" → present</td></tr>
+    <tr><td><strong>Case</strong></td><td>nom, acc, gen</td><td>"she" → nom; "her" → acc</td></tr>
+    <tr><td><strong>Agreement</strong></td><td>agr</td><td>Subject-verb must match number/person</td></tr>
+  </table>
+
+  <span class="section-label">Feature Structures</span>
+  <p>Each word is associated with a set of feature-value pairs called a <strong>feature structure</strong> (also called Attribute-Value Matrix / AVM):</p>
+
+  <div class="feat-struct"><span class="key">she</span>  →  [ <span class="key">PER</span>: <span class="val">3rd</span>, <span class="key">NUM</span>: <span class="val">sg</span>, <span class="key">CASE</span>: <span class="val">nom</span>, <span class="key">GEN</span>: <span class="val">fem</span>  ]
+
+<span class="key">eats</span> →  [ <span class="key">TENSE</span>: <span class="val">pres</span>, <span class="key">AGR</span>: [ <span class="key">PER</span>: <span class="val">3rd</span>, <span class="key">NUM</span>: <span class="val">sg</span> ] ]</div>
+
+  <span class="section-label">Agreement Using Features</span>
+  <p>Features enforce grammatical constraints. Subject and verb must agree in number and person:</p>
+
+  <div class="example-box">
+    <span class="ex-label">Example</span>
+    <ul>
+      <li>✅ <strong>"She eats"</strong> — "she" is [3rd, sg]; "eats" requires [3rd, sg] → <strong>MATCH</strong></li>
+      <li>❌ <strong>"She eat"</strong> — "she" is [3rd, sg]; "eat" requires [1st/2nd or pl] → <strong>MISMATCH → Rejected</strong></li>
+      <li>✅ <strong>"Mary saw Bob"</strong> — "Mary" is [3rd, sg]; "saw" is past (no agreement needed in past)</li>
+    </ul>
+  </div>
+
+  <span class="section-label">How Agreement is Enforced</span>
+  <ol>
+    <li>Assign feature structures to all words in a lexicon.</li>
+    <li>Grammar rules carry feature constraints.</li>
+    <li>During parsing, features of daughter nodes are checked against parent node requirements.</li>
+    <li>If features do not match → parse <strong>fails</strong> (sentence rejected).</li>
+  </ol>
+
+  <div class="flow-diagram">
+    <div class="flow-row">
+      <div class="flow-box">Word Features</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box alt">Grammar Rule Constraints</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box alt">Feature Matching</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box gold">Accept / Reject</div>
+    </div>
+    <p class="flow-note">Agreement enforcement through grammatical features</p>
+  </div>
+
+  <div class="conclusion-box">
+    <strong>Conclusion:</strong> Grammatical features encode linguistic properties as attribute-value pairs and are essential for enforcing agreement in NLP grammars. They are the building blocks of feature-based grammars and unification, enabling accurate parsing of natural language.
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════
+     TOPIC 5 — UNIFICATION IN FEATURE-BASED GRAMMAR
+═══════════════════════════════════════════════ -->
+<section class="topic" id="t5">
+  <div class="topic-header">
+    <span class="topic-num">Q5</span>
+    <h2>Unification in Feature-Based Grammar <span class="marks-badge">6 Marks</span></h2>
+  </div>
+
+  <span class="section-label">Definition</span>
+  <div class="def-box">
+    <strong>Unification</strong> is an operation that combines two compatible feature structures into a single, merged feature structure. If the two structures share the same values for all overlapping features, unification <em>succeeds</em>; otherwise it <em>fails</em>. It is the core operation in feature-based grammar.
+  </div>
+
+  <span class="section-label">Unification Rules</span>
+  <ul>
+    <li><strong>Identical values:</strong> Two structures unify if their shared features have the same value.</li>
+    <li><strong>Unspecified value (ANY):</strong> A variable or unspecified feature unifies with any value.</li>
+    <li><strong>Conflict:</strong> If two structures disagree on a feature value → Unification <strong>FAILS</strong>.</li>
+    <li><strong>Result:</strong> The unified structure contains all features from both, plus any resolved variables.</li>
+  </ul>
+
+  <span class="section-label">Unification Algorithm (Steps)</span>
+  <ol>
+    <li>Take two feature structures FS1 and FS2.</li>
+    <li>For each feature in FS1, check if FS2 has the same feature.</li>
+    <li>If both have the feature with the <strong>same value</strong> → keep it.</li>
+    <li>If one has the feature and the other does not → add it to the result.</li>
+    <li>If both have the feature with <strong>different values</strong> → <strong>FAIL</strong>.</li>
+    <li>Return the merged structure.</li>
+  </ol>
+
+  <div class="flow-diagram">
+    <div class="flow-row">
+      <div class="flow-box">FS1</div>
+      <div class="flow-arrow">⊔</div>
+      <div class="flow-box">FS2</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box alt">Check Each Feature</div>
+    </div>
+    <div class="flow-arrow" style="font-size:1.5rem;color:var(--muted);margin:0.3rem 0">↓</div>
+    <div class="flow-row">
+      <div class="flow-box gold">Same Value → Keep</div>
+      <div style="margin:0 0.5rem;color:var(--muted)">|</div>
+      <div class="flow-box alt">Missing → Add</div>
+      <div style="margin:0 0.5rem;color:var(--muted)">|</div>
+      <div class="flow-box accent">Conflict → FAIL</div>
+    </div>
+    <p class="flow-note">Unification operation between two feature structures</p>
+  </div>
+
+  <span class="section-label">Example — Successful Unification</span>
+  <div class="example-box">
+    <span class="ex-label">Unifying subject "she" with verb "eats"</span>
+    <div class="feat-struct"><span class="key">she</span>:  [ <span class="key">NUM</span>: <span class="val">sg</span>, <span class="key">PER</span>: <span class="val">3rd</span> ]
+<span class="key">eats</span>: [ <span class="key">AGR</span>: [ <span class="key">NUM</span>: <span class="val">sg</span>, <span class="key">PER</span>: <span class="val">3rd</span> ] ]
+
+<span style="color:#a9dc76">Result</span>: Unification SUCCEEDS ✅
+         [ <span class="key">NUM</span>: <span class="val">sg</span>, <span class="key">PER</span>: <span class="val">3rd</span> ] matches [AGR: sg, 3rd ]</div>
+    <p>✅ <strong>"She eats"</strong> is grammatically correct.</p>
+  </div>
+
+  <span class="section-label">Example — Failed Unification</span>
+  <div class="example-box">
+    <span class="ex-label">Trying to unify "she" with "eat"</span>
+    <div class="feat-struct"><span class="key">she</span>: [ <span class="key">NUM</span>: <span class="val">sg</span>, <span class="key">PER</span>: <span class="val">3rd</span> ]
+<span class="key">eat</span>: [ <span class="key">AGR</span>: [ <span class="key">NUM</span>: <span class="val">pl</span> ] ]   ← expects plural
+
+<span style="color:#ff6b6b">Result</span>: Unification FAILS ❌
+         sg ≠ pl  →  CONFLICT</div>
+    <p>❌ <strong>"She eat"</strong> is rejected — number mismatch.</p>
+  </div>
+
+  <span class="section-label">Importance of Unification</span>
+  <ul>
+    <li>Elegant way to enforce <strong>grammatical agreement</strong> without separate rules for each case.</li>
+    <li>Supports <strong>variable sharing</strong> — one feature value can be linked to multiple positions.</li>
+    <li>Foundation for powerful grammar formalisms like <strong>HPSG, LFG, and PATR-II</strong>.</li>
+    <li>Allows grammars to remain compact while covering many agreement phenomena.</li>
+  </ul>
+
+  <div class="conclusion-box">
+    <strong>Conclusion:</strong> Unification is the central mechanism of feature-based grammar. It merges feature structures when they are compatible and rejects combinations that violate grammatical constraints. This simple but powerful operation underpins agreement checking in modern NLP parsers.
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════
+     TOPIC 6 — FEATURE-BASED PARSING
+═══════════════════════════════════════════════ -->
+<section class="topic" id="t6">
+  <div class="topic-header">
+    <span class="topic-num">Q6</span>
+    <h2>Feature-Based Parsing <span class="marks-badge">6 Marks</span></h2>
+  </div>
+
+  <span class="section-label">Definition</span>
+  <div class="def-box">
+    <strong>Feature-Based Parsing</strong> is a parsing approach that integrates grammatical features (attribute-value pairs) into grammar rules and uses <em>unification</em> to enforce agreement constraints during parsing. It extends standard CFG parsing to handle morphological and syntactic agreement.
+  </div>
+
+  <span class="section-label">How It Works</span>
+  <p>In standard CFG, rules like <code>S → NP VP</code> have no agreement check. Feature-based parsing augments rules with feature constraints:</p>
+
+  <div class="feat-struct"><span style="color:#cba6f7">Rule:</span>  S  → NP[<span class="key">NUM</span>:<span class="val">?n</span>, <span class="key">PER</span>:<span class="val">?p</span>]  VP[<span class="key">AGR</span>:[<span class="key">NUM</span>:<span class="val">?n</span>, <span class="key">PER</span>:<span class="val">?p</span>]]
+
+<span style="color:#cba6f7">Meaning:</span> NP and VP must share the same NUM and PER values.
+          <span class="val">?n</span> and <span class="val">?p</span> are variables — they unify to the same value.</div>
+
+  <span class="section-label">Steps in Feature-Based Parsing</span>
+  <ol>
+    <li><strong>Lexicon Lookup:</strong> Each input word is assigned a feature structure from the lexicon.</li>
+    <li><strong>Rule Application:</strong> Grammar rules are applied (top-down or bottom-up).</li>
+    <li><strong>Unification Check:</strong> At each rule application, feature structures of constituents are unified.</li>
+    <li><strong>Success:</strong> If unification succeeds → parse continues.</li>
+    <li><strong>Failure:</strong> If unification fails → that parse path is abandoned.</li>
+    <li><strong>Output:</strong> A parse tree annotated with feature structures at each node.</li>
+  </ol>
+
+  <div class="flow-diagram">
+    <div class="flow-row">
+      <div class="flow-box gold">Input Sentence</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Lexicon Lookup (features)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box alt">Apply Grammar Rule</div>
+    </div>
+    <div class="flow-arrow" style="font-size:1.5rem;color:var(--muted);margin:0.3rem 0">↓</div>
+    <div class="flow-row">
+      <div class="flow-box alt">Unification Check</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box accent">Success → Build Tree</div>
+      <div style="margin:0 0.5rem;color:var(--muted)">/</div>
+      <div class="flow-box" style="background:#7f1d1d">Fail → Backtrack</div>
+    </div>
+    <p class="flow-note">Feature-Based Parsing Pipeline</p>
+  </div>
+
+  <span class="section-label">Complete Example — "She eats"</span>
+  <div class="example-box">
+    <span class="ex-label">Step-by-Step Feature-Based Parse</span>
+    <div class="feat-struct"><span style="color:#cba6f7">Lexicon:</span>
+  she  → [ <span class="key">CAT</span>: <span class="val">NP</span>, <span class="key">NUM</span>: <span class="val">sg</span>, <span class="key">PER</span>: <span class="val">3rd</span> ]
+  eats → [ <span class="key">CAT</span>: <span class="val">VP</span>, <span class="key">AGR</span>: [<span class="key">NUM</span>: <span class="val">sg</span>, <span class="key">PER</span>: <span class="val">3rd</span>] ]
+
+<span style="color:#cba6f7">Rule:</span> S → NP[NUM:?n, PER:?p]  VP[AGR:[NUM:?n, PER:?p]]
+
+<span style="color:#cba6f7">Unification:</span>
+  NP.NUM = sg,  VP.AGR.NUM = sg  → <span style="color:#a9dc76">MATCH ✅</span>
+  NP.PER = 3rd, VP.AGR.PER = 3rd → <span style="color:#a9dc76">MATCH ✅</span>
+
+<span style="color:#a9dc76">Result: Parse SUCCEEDS — "She eats" is grammatical ✅</span></div>
+  </div>
+
+  <div class="example-box">
+    <span class="ex-label">Rejected Example — "She eat"</span>
+    <div class="feat-struct">  she  → [ <span class="key">NUM</span>: <span class="val">sg</span> ]
+  eat  → [ <span class="key">AGR</span>: [<span class="key">NUM</span>: <span class="val">pl</span>] ]
+
+  Unification: sg ≠ pl → <span style="color:#ff6b6b">FAIL ❌ → Sentence Rejected</span></div>
+  </div>
+
+  <span class="section-label">Advantages of Feature-Based Parsing</span>
+  <ul>
+    <li><strong>Agreement handling:</strong> Automatically enforces subject-verb, noun-adjective agreement.</li>
+    <li><strong>Compact grammar:</strong> One rule with features replaces many specific rules.</li>
+    <li><strong>Precise:</strong> Rejects ungrammatical sentences that CFG alone would accept.</li>
+    <li><strong>Extensible:</strong> Easily extended with more features (case, gender, tense) without changing the parser.</li>
+  </ul>
+
+  <span class="section-label">Relationship to Other Concepts</span>
+  <div class="flow-diagram">
+    <div class="flow-row">
+      <div class="flow-box gold">Grammatical Features</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box alt">Feature Structures (AVM)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box alt">Unification</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box accent">Feature-Based Parsing</div>
+    </div>
+    <p class="flow-note">Logical progression — features enable structures, structures enable unification, unification enables feature-based parsing</p>
+  </div>
+
+  <div class="conclusion-box">
+    <strong>Conclusion:</strong> Feature-Based Parsing combines the power of context-free parsing with morphological and syntactic agreement checking through unification. It is more accurate than plain CFG parsing and forms the basis of many real-world NLP grammar frameworks.
+  </div>
+</section>
+
+</main>
+
+<footer>
+  NLP Unit 3 · Exam Preparation Guide &nbsp;·&nbsp; All examples use "Mary saw Bob", "She eats", "Kim chased Lee" for consistency.
+</footer>
+
+</body>
+</html>
