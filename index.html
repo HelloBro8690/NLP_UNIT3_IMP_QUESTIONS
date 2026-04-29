@@ -18,6 +18,22 @@
     --highlight: #fef9e7;
     --code-bg: #1e1e2e;
     --code-fg: #cdd6f4;
+     --transition: 0.3s ease;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #f5f5f5;
+      --paper: #121212;
+      --cream: #1e1e1e;
+      --accent: #e74c3c;
+      --accent2: #3498db;
+      --gold: #f1c40f;
+      --muted: #b0b0b0;
+      --border: #2c2c2c;
+      --highlight: #2a2a2a;
+      --code-bg: #0d1117;
+      --code-fg: #79c0ff;
+    }
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -339,6 +355,35 @@
     border-top: 1px dashed var(--border);
     margin: 3rem 0;
   }
+   .def-box, .example-box, .conclusion-box {
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    margin: 0.8rem 0;
+  }
+
+  .def-box {
+    background: var(--highlight);
+    border-left: 4px solid var(--gold);
+    font-style: italic;
+  }
+
+  .example-box {
+    background: #eaf2fb;
+    border-left: 4px solid var(--accent2);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .example-box { background: #1e2a38; }
+  }
+
+  .conclusion-box {
+    background: #f9f0f0;
+    border-left: 4px solid var(--accent);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .conclusion-box { background: #2a1e1e; }
+  }
 
   /* ── FOOTER ── */
   footer {
@@ -349,12 +394,47 @@
     border-top: 1px solid var(--border);
     font-style: italic;
   }
+ 
+
 
   @media (max-width: 600px) {
     .topic { padding-left: 1rem; }
     .tree-container { font-size: 0.72rem; }
     .flow-box { font-size: 0.72rem; padding: 0.35rem 0.65rem; }
   }
+    /* Dark mode class */
+  body.dark-mode {
+    --ink: #f5f5f5;
+    --paper: #121212;
+    --cream: #1e1e1e;
+    --accent: #e74c3c;
+    --accent2: #3498db;
+    --gold: #f1c40f;
+    --muted: #b0b0b0;
+    --border: #2c2c2c;
+    --highlight: #2a2a2a;
+    --code-bg: #0d1117;
+    --code-fg: #79c0ff;
+  }
+
+  /* Toggle button */
+  .toggle-btn {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: var(--accent2);
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    transition: background var(--transition);
+  }
+
+  .toggle-btn:hover {
+    
 </style>
   <link rel="icon" type="image/png" href="https://copilot.microsoft.com/th/id/BCO.f2d01517-ca3c-45c4-a37b-a4ab21cb0679.png">
 
@@ -366,7 +446,7 @@
   <h1>Natural Language <span>Processing</span></h1>
   <p class="subtitle">Parsing · Dependency Grammar · Feature-Based Grammar · Unification</p>
 </header>
-
+<button class="toggle-btn" onclick="toggleMode()">🌗 Toggle Mode</button>
 <nav class="toc">
   <h2>Topics Covered</h2>
   <ol>
@@ -380,7 +460,11 @@
 </nav>
 
 <main>
-
+<script>
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+  </script>
 <!-- ══════════════════════════════════════════════
      TOPIC 1 — PARSING TECHNIQUES
 ═══════════════════════════════════════════════ -->
