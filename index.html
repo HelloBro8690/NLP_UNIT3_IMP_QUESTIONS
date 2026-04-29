@@ -356,6 +356,8 @@
     .flow-box { font-size: 0.72rem; padding: 0.35rem 0.65rem; }
   }
 </style>
+  <link rel="icon" type="image/png" href="https://copilot.microsoft.com/th/id/BCO.f2d01517-ca3c-45c4-a37b-a4ab21cb0679.png">
+
 </head>
 <body>
 
@@ -932,6 +934,20 @@ Adj → big | small | old</pre>
 <footer>
   NLP Unit 3 · Exam Preparation Guide &nbsp;·&nbsp; All examples use "Mary saw Bob", "She eats", "Kim chased Lee" for consistency.
 </footer>
+<script>
+  function changeFavicon(src) {
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link);
+    }
+    link.href = src;
+  }
+
+  // Example: change after 3 seconds
+  setTimeout(() => changeFavicon("favicon2.png"), 3000);
+</script>
 
 </body>
 </html>
